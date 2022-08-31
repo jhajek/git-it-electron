@@ -53,7 +53,7 @@
 
 <div class="box--border--blue box--step">
     <h3 i18n-data="ch05~Connect your Local to your Remote"></h3>
-    <p i18n-data="ch05~Now you've got an empty repository started on GitHub.com. At the top you'll see 'Quick Setup', make sure the 'HTTPS' button is selected and copy the address—this is the address of your repository on GitHub's servers."></p>
+    <p i18n-data="ch05~Now you've got an empty repository started on GitHub.com. At the top you'll see 'Quick Setup', make sure the 'SSH' button is selected and copy the address—this is the address of your repository on GitHub's servers."></p>
 
     <p i18n-type="standard_html"
         i18n-data="ch05~Back in your terminal, and inside of the 'hello-world' folder that you initialized as a Git repository in the earlier challenge, you want to tell Git to remember the address of the remote version on GitHub's servers. You can have multiple remotes so each requires a name. The primary remote is typically named {/cde/}origin{/cde_e/}."></p>
@@ -65,47 +65,41 @@
         i18n-data="ch05~Your {/str/}local{/str_e/} repository now knows where your {/str/}remote{/str_e/} repository, named 'origin', lives on GitHub's servers. Think of it as adding a name and address on speed dial—now when you need to send something there, you can."></p>
 </div>
 
-<div class="box--border--grey box--tip">
-    <p><strong i18n-data="ch05~Windows Users:"></strong></p>
-    <p i18n-type="standard_html"
-        i18n-data="ch05~If you have {/str/}GitHub Desktop{/str_e/} on your computer, a remote named 'origin' is automatically created in your local repository. In that case, you'll just need to tell it what URL to associate with 'origin'. Use this command instead of the 'add' one above:"></p>
-
-    <div class='code'><code class="shell">git remote set-url origin &lt;URLFROMGITHUB&gt;</code></div>
-</div>
-
 <div class="box--solid--light">
-    <h2 i18n-data="ch05~Personal Access Tokens"></h2>
+    <h2 i18n-data="ch05~SSH Access Key"></h2>
     <p i18n-type="standard_html"
-        i18n-data="ch05~On the next step you will need to authenticate yourself towards GitHub. GitHub does not accept simple passwords for this, but requires to use a {/str/}Personal Access Token (PAT){/str_e/}. This might feel a bit cumbersome but is meant to be a security feature. Access-tokens are like strong passwords that can be scoped, be set to expire or also just be deactivated manually once compromised."></p>
+        i18n-data="ch05~On the next step you will need to authenticate yourself towards GitHub. GitHub does not accept simple passwords anymore, which is a good thing. You can use a {/str/}Personal Access Token (PAT){/str_e/}. In this case we will ask you to generate a Public/Private KeyPair. This might feel a bit cumbersome but is meant to be a security feature."></p>
 
     <p i18n-type="standard_html"
-        i18n-data="ch05~Depending on your git installation there might be alternative methods for authentication available (e.g. via Browser). If not, you will need to create a PAT and use this one as your password, when prompted."></p>
+        i18n-data="ch05~On Mac/Windows/Linux from your Terminal run the command: {/cde/}ssh-keygen -t ed25519{/cde_e/}, this generates a public and private key pair of the type Twisted Edwards Curve."></p>
 </div>
 
 <div class="box--border--grey box--tip">
-    <p><strong i18n-data="ch05~To generate a new Personal Access Token:"></strong></p>
+    <p><strong i18n-data="ch05~To generate a new SSH Key:"></strong></p>
     <ul>
         <li i18n-type="standard_html"
-            i18n-data="ch05~Open {/lnk_pat/}Github - Personal access tokens{/lnk_e/} and click on 'Generate new token'."
-            i18n-options='{
-                "lnk_pat": "https://github.com/settings/tokens"
-            }'></li>
-        <li i18n-data="ch05~Add a note to identify your token."></li>
-        <li i18n-data="ch05~Best set some expiration."></li>
+            i18n-data="ch05~Open your Terminal."></li>
+        <li i18n-data="ch05~Type the command: {/cde/}ssh-keygen -t ed25519{/cde_e/}"></li>
+        <li i18n-data="ch05~Take note of the default location the keypair will be generated the .ssh directory under your home directory"></li>
         <li i18n-type="standard_html"
-            i18n-data="ch05~Select the scope {/cde/}public_repo{/cde_e/}. This suffices for what we will be doing here."></li>
-        <li i18n-data="ch05~Generate the token, then copy and store it in a safe location. Keep in mind it should be handled like a password."></li>
-        <li i18n-data="ch05~Use it when beeing asked for a password."></li>
+            i18n-data="ch05~The default file will be named {/cde/}id_ed25519{/cde_e/}."></li>
+        <li i18n-data="ch05~You can hit enter twice to bypass the PassPhrase section of the key creation."></li>
+        <li i18n-data="ch05~Take note of the path to the .pub file -- the public portion of the key.  Use the {/cde/}cat{/cde_e/} command to display the content of that file. Copy this to your clipboard."></li>
+        <li i18n-data="ch05~Go to your GitHub page, click your user icon in the upper left."></li>
+        <li i18n-data="ch05~Scroll down to {/str/}Settings{/str_e/}."></li>
+        <li i18n-data="ch05~On the left menu select {/str/}SSH and GPG Keys{/str_e/}."></li>
+        <li i18n-data="ch05~Click the button for {/str/}New SSH Key{/str_e/}."></li>
+        <li i18n-data="ch05~Give the new key a descriptive name and paste the Public Key portion into the textbox and click {/str/}ADD NEW KEY{/str_e/}."></li>
     </ul>
 </div>
 
 <div class="box--border--blue box--step">
     <h3 i18n-data="ch05~Push Work to your Remote"></h3>
     <p i18n-type="standard_html"
-        i18n-data="ch05~Next you want to {/str/}push{/str_e/} (send) everything you've done locally to your remote repository on GitHub. This is something you'll do often so that your remote version is up to date and matching the state of your local version."></p>
+        i18n-data="ch05~Next you want to {/str/}push{/str_e/} (send) everything you've done locally to your remote repository on GitHub. This is something you'll do often so that your remote version is up to date and matching the state of your local version. You will have to rename your branch from {/str/}master{/str_e/} to {/str/}main{/str_e/} with the command: {/cde}git branch -m main{/cde_e/}"></p>
 
     <p i18n-type="standard_html"
-        i18n-data="ch05~Git has a branching system so that you can work on different parts of a project at different times. We'll learn more about that later, but by default the first branch is named 'master'. When you push (and later pull) from a project, you tell Git the {/str/}branch name{/str_e/} you want and the name of the {/str/}remote{/str_e/} that it lives on."></p>
+        i18n-data="ch05~Git has a branching system so that you can work on different parts of a project at different times. We'll learn more about that later, but by default the first branch is named 'main'. When you push (and later pull) from a project, you tell Git the {/str/}branch name{/str_e/} you want and the name of the {/str/}remote{/str_e/} that it lives on."></p>
 
     <p i18n-data="ch05~In this case, we'll send our branch named 'master' to our remote on GitHub named 'origin'."></p>
     <div class='code'><code class="shell">git push origin master</code></div>
